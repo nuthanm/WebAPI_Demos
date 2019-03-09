@@ -91,3 +91,8 @@ D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\EntityFr
 D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\EntityFramework.dll
 D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\EntityFramework.SqlServer.dll
 D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\EntityFramework.SqlServer.xml
+D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\WebApiContrib.Formatting.Jsonp.dll
+D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\WebApiContrib.Formatting.Jsonp.pdb
+D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\System.Web.Cors.dll
+D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\System.Web.Http.Cors.dll
+D:\Projects\Nuthan\WebApi\WebAPI_Concepts\WebAPI_Demos\WebAPI_Demos\bin\System.Web.Http.Cors.xml

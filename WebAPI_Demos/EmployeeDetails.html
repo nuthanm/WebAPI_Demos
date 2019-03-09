@@ -12,8 +12,9 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: 'api/employees/',
-                    dataType: 'json',
+                    url: 'api/employees',
+                    accepts:'application/json',
+                    dataType: 'jsonp',
                     success: function (data) {
                         ulList.empty();
                         $.each(data, function (index, val) {

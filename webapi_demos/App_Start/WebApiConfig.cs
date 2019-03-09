@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebAPI_Demos
 {
@@ -36,6 +33,19 @@ namespace WebAPI_Demos
 
             // To change Pascal Case to camelCase
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            /*
+            // JSONP is one way to enable Cross Domain Sharing
+            var jsonPFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
+            config.Formatters.Insert(0, jsonPFormatter);
+            */
+
+            //Enable CORS
+            // Origin : * means All  and if you want specific URL then add like http://localhost:2150,http://localhost:8080
+            // Headers: Specifiy particular content type
+            // Methods: Specify if only GET/PUT/DELETE/POST/*
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
         }
     }
 }
