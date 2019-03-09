@@ -1,0 +1,4 @@
+#Visual Studio 2017 folder is not required
+.vs/
+packages/
+*.sln
