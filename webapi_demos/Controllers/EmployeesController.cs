@@ -14,11 +14,28 @@ namespace WebAPI_Demos.Controllers
         /// </summary>
         /// <returns>Full List of Employee Details</returns>
         [HttpGet]
-        public IEnumerable<Employee> LoadAllEmployees()
+        public HttpResponseMessage LoadAllEmployees(string gender = "All")
         {
             using (EmployeeDBEntities entities = new EmployeeDBEntities())
             {
-                return entities.Employees.ToList();
+                switch (gender.ToLower())
+                {
+                    case "all":
+                        return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
+                    case "male":
+                        return Request.CreateResponse(HttpStatusCode.OK,
+               entities.Employees.Where(entity => entity.Gender == "male").ToList());
+
+                    case "female":
+                        return Request.CreateResponse(HttpStatusCode.OK,
+           entities.Employees.Where(entity => entity.Gender == "female").ToList());
+
+                    default:
+                        return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Value must be either All,Male or Female only");
+
+
+                }
+
             }
         }
 
@@ -50,7 +67,7 @@ namespace WebAPI_Demos.Controllers
         /// employee object as per this example
         /// </summary>
         /// <param name="employee"></param>
-        public HttpResponseMessage Post([FromBody]Employee employee)
+        public HttpResponseMessage Post(Employee employee)
         {
             try
             {
@@ -96,12 +113,12 @@ namespace WebAPI_Demos.Controllers
                     }
                     else
                     {
-                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, string.Format("Employee with this Id {0}  was not found",id));
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, string.Format("Employee with this Id {0}  was not found", id));
                     }
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }

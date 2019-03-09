@@ -2,3 +2,10 @@
 .vs/
 packages/
 *.sln
+
+# dll and pdb files not required
+*.dll
+*.pdb
+
+bin/*.dll
+obj/*.dll
