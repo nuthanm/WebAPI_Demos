@@ -44,3 +44,78 @@ This repository has full of Asp.NET Standard Web API Demos
                      }`
      To fix this issue, add [HttpGet] attribute on top of custom named method.
      
+12. **Attribute Routing** => Define Routes using [Route] attribute at Controller levels.
+
+In WebApi 2, Attribute Routing is by default enabled. To cross verify, go to WebApiConfig.cs and see whether the below code snippet is there or not.
+
+    config.MapHttpAttributeRoutes()
+
+**Pros** :
+1. It has more control to create URI patterns like Hierachies of resources
+   - Ex: Employee wants his record
+         `[Route("api/employees/id")]`
+   - Ex: Employee wants his posts
+         `[Route("api/employees/id")]` => This will throw the error because same signature for Getting Id and as well as for getting posts and internal it will confuse and to avoid this we add additional suffix
+         `[Route"(api/employees/id/posts")]` => THis code snippet gives us selected employee posts.
+2. We use both Attribute Routing and Convention based routing in same WebApi Project.
+   If [Route] attribute at controller action then it use Attribute Routing or else use Convention Based Routing.
+   
+13. **Attribute Routing Constraints**
+Same problem we face if two action methods have same signature like we see earlier. To overcome this problem Attribute Routing constraints solves the issue.
+
+`Syntax: paramter:constraint`
+
+Where constraint is nothing but data types : int , alpha, double,....
+
+    Ex:
+    [Route("{id:int}"]
+    [Route("{name:aplha}"]
+    
+Allows us to solve the following problem
+    [Route("{id:int:min(1)}"] => It means id>=1 and integer type then only map to this URL
+Ex: public Employee Get(int id)
+    {
+      
+    }
+    [Route("{name:string}") => It means name is string type then only map to this URL.
+    public Employee Get(string name)
+    {
+
+    }
+
+14. **RoutePrefix** is an attribute is used to specify common route prefix(Ex: api/employees). Earlier we write api/employees/{id} in all the action methods. Using RoutePrefix attributes we eliminate this and add at controller level.
+
+`Ex: [RoutePrefix("api/employees")]`
+
+**Note:** To override RoutePrefix using `"~/"` inside [Route] attribute.
+`Ex: [Route("~/api/users")] inside "api/employees"`
+
+15. **API Versioning** in Web API is used for denoting that released API in public and clients started using/consuming services of API. As we all know, Once API is in public there may be changes in future either in terms of issues or new requirements.
+    
+ ` API Versioning Can be achieve in the following ways `
+
+    1. URI's
+       - Versioning either Conventional Based Routing in WebApiConfig.cs or Attribute Routing
+       - Ex: AttributeRouting => [Route("api/v1/<ControllerName>)]
+       - Ex: Conventional Based Routing 
+       - config.Routes.MapHttpRoute(
+               name: "Version2",
+               routeTemplate: "api/v2/employees/{id}",
+               defaults: new { id = RouteParameter.Optional, controller = "EmployeeV2" }
+         );
+    2. Query Strings
+        - Request coming from client in the below format
+          /api/employees?v=1
+          /api/employees?v=2
+          Note: Write custom logic for Query Strings while sending a request. Logic to write to call respective controller.
+        
+    3. Version Header
+       Note: Write custom logic in Version Header while sending a request. Logic to write to call respective controller.
+    4. Accept Header => Tell to the server what file format the browser needs the data. We can define the format using MIME Types.
+       Note: Write custom logic in Accept Header while sending a request. Logic to write to call respective controller.
+       Ex: Accept: application/json;version = 1 
+    5. Media Type : Instead of using standard media types we go with custom media type 
+       Ex: Accept : application/<anyformat which has version and type of data>
+
+`Reference URL for Web API :`
+[https://www.youtube.com/playlist?list=PL6n9fhu94yhW7yoUOGNOfHurUE6bpOO2b](https://www.youtube.com/playlist?list=PL6n9fhu94yhW7yoUOGNOfHurUE6bpOO2b "Web API Youtube Playlist by KudVenkat")
